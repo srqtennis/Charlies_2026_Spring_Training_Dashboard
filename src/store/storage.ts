@@ -1,7 +1,7 @@
-import { SessionLog, LessonPlan, AssessmentMetric, Achievement } from '../types';
+import { SessionLog, LessonPlan, AssessmentMetric, Achievement, PracticeCheckoff } from '../types';
 
 const STORAGE_KEY = 'charlie-training-dashboard';
-const STORAGE_VERSION = 1;
+const STORAGE_VERSION = 2;
 
 export interface StorageData {
   version: number;
@@ -11,6 +11,7 @@ export interface StorageData {
   metrics: AssessmentMetric[];
   achievements: Achievement[];
   completedMilestones: string[];
+  practiceCheckoffs: PracticeCheckoff[];
 }
 
 const defaultData: StorageData = {
@@ -21,15 +22,26 @@ const defaultData: StorageData = {
   metrics: [],
   achievements: [],
   completedMilestones: [],
+  practiceCheckoffs: [],
 };
 
 export function loadFromStorage(): StorageData {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return defaultData;
-    const parsed = JSON.parse(raw) as StorageData;
+    const parsed = JSON.parse(raw);
+    // Migrate from v1 → v2: add practiceCheckoffs
+    if (parsed.version === 1) {
+      const migrated: StorageData = {
+        ...parsed,
+        version: 2,
+        practiceCheckoffs: [],
+      };
+      saveToStorage(migrated);
+      return migrated;
+    }
     if (parsed.version !== STORAGE_VERSION) return defaultData;
-    return parsed;
+    return parsed as StorageData;
   } catch {
     return defaultData;
   }

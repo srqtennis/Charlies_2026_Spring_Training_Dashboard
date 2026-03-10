@@ -39,12 +39,18 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
-      <div className="p-4 border-t border-white/20">
+      <div className="p-4 border-t border-white/20 space-y-2">
         <NavLink
           to="/session/start"
           className="block w-full text-center bg-srq-red hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition-colors"
         >
           Start Session
+        </NavLink>
+        <NavLink
+          to="/player"
+          className="block w-full text-center bg-white/10 hover:bg-white/20 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm"
+        >
+          ⚡ Charlie's View
         </NavLink>
       </div>
     </aside>

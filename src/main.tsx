@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './store/AppContext';
 import AppShell from './components/layout/AppShell';
+import PlayerShell from './components/layout/PlayerShell';
 import DashboardPage from './pages/DashboardPage';
 import PlanPage from './pages/PlanPage';
 import WeekDetailPage from './pages/WeekDetailPage';
@@ -19,6 +20,10 @@ import MetricDetailPage from './pages/MetricDetailPage';
 import MetricComparePage from './pages/MetricComparePage';
 import DrillLibraryPage from './pages/DrillLibraryPage';
 import PillarsPage from './pages/PillarsPage';
+import PlayerHomePage from './pages/player/PlayerHomePage';
+import PlayerStatsPage from './pages/player/PlayerStatsPage';
+import PlayerAchievementsPage from './pages/player/PlayerAchievementsPage';
+import PlayerPracticePage from './pages/player/PlayerPracticePage';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
@@ -26,6 +31,7 @@ createRoot(document.getElementById('root')!).render(
     <HashRouter>
       <AppProvider>
         <Routes>
+          {/* Coach View */}
           <Route element={<AppShell />}>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
@@ -44,6 +50,14 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/metrics/:id" element={<MetricDetailPage />} />
             <Route path="/drills" element={<DrillLibraryPage />} />
             <Route path="/system/pillars" element={<PillarsPage />} />
+          </Route>
+
+          {/* Player View (Charlie) */}
+          <Route element={<PlayerShell />}>
+            <Route path="/player" element={<PlayerHomePage />} />
+            <Route path="/player/stats" element={<PlayerStatsPage />} />
+            <Route path="/player/achievements" element={<PlayerAchievementsPage />} />
+            <Route path="/player/practice" element={<PlayerPracticePage />} />
           </Route>
         </Routes>
       </AppProvider>

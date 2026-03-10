@@ -202,3 +202,9 @@ export interface PracticeItem {
   purpose: string;
   frequency: 'daily' | 'weekly';
 }
+
+export interface PracticeCheckoff {
+  date: string;        // YYYY-MM-DD
+  exercise: string;    // matches PracticeItem.exercise
+  completed: boolean;
+}

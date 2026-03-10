@@ -1,5 +1,5 @@
 import { createContext, useContext, useReducer, useEffect, ReactNode } from 'react';
-import { SessionLog, LessonPlan, AssessmentMetric, Achievement } from '../types';
+import { SessionLog, LessonPlan, AssessmentMetric, Achievement, PracticeCheckoff } from '../types';
 import { loadFromStorage, saveToStorage, StorageData } from './storage';
 import { generateAllLessonPlans } from '../utils/lesson-generator';
 import { assessmentMetrics } from '../data/seed/metrics';
@@ -13,6 +13,7 @@ export interface AppState {
   achievements: Achievement[];
   completedMilestones: string[];
   activeSessionId: string | null;
+  practiceCheckoffs: PracticeCheckoff[];
 }
 
 type Action =
@@ -24,6 +25,8 @@ type Action =
   | { type: 'TOGGLE_MILESTONE'; payload: string }
   | { type: 'SET_ACTIVE_SESSION'; payload: string | null }
   | { type: 'EARN_ACHIEVEMENT'; payload: string }
+  | { type: 'TOGGLE_PRACTICE_CHECKOFF'; payload: { date: string; exercise: string } }
+  | { type: 'CLEAR_PRACTICE_DAY'; payload: string }
   | { type: 'RESET_DATA' };
 
 function appReducer(state: AppState, action: Action): AppState {
@@ -37,6 +40,7 @@ function appReducer(state: AppState, action: Action): AppState {
         metrics: action.payload.metrics,
         achievements: action.payload.achievements,
         completedMilestones: action.payload.completedMilestones,
+        practiceCheckoffs: action.payload.practiceCheckoffs || [],
       };
     case 'ADD_SESSION_LOG':
       return { ...state, sessionLogs: [...state.sessionLogs, action.payload] };
@@ -70,6 +74,34 @@ function appReducer(state: AppState, action: Action): AppState {
           a.id === action.payload ? { ...a, earned: true, earnedDate: new Date().toISOString().split('T')[0] } : a
         ),
       };
+    case 'TOGGLE_PRACTICE_CHECKOFF': {
+      const { date, exercise } = action.payload;
+      const existing = state.practiceCheckoffs.find(
+        pc => pc.date === date && pc.exercise === exercise
+      );
+      if (existing) {
+        // Toggle existing
+        return {
+          ...state,
+          practiceCheckoffs: state.practiceCheckoffs.map(pc =>
+            pc.date === date && pc.exercise === exercise
+              ? { ...pc, completed: !pc.completed }
+              : pc
+          ),
+        };
+      } else {
+        // Create new (default to completed=true on first tap)
+        return {
+          ...state,
+          practiceCheckoffs: [...state.practiceCheckoffs, { date, exercise, completed: true }],
+        };
+      }
+    }
+    case 'CLEAR_PRACTICE_DAY':
+      return {
+        ...state,
+        practiceCheckoffs: state.practiceCheckoffs.filter(pc => pc.date !== action.payload),
+      };
     case 'RESET_DATA':
       return { ...initialState, initialized: false };
     default:
@@ -85,6 +117,7 @@ const initialState: AppState = {
   achievements: [],
   completedMilestones: [],
   activeSessionId: null,
+  practiceCheckoffs: [],
 };
 
 const AppContext = createContext<{
@@ -102,13 +135,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     } else {
       const lessonPlans = generateAllLessonPlans();
       const initData: StorageData = {
-        version: 1,
+        version: 2,
         initialized: true,
         sessionLogs: [],
         lessonPlans,
         metrics: assessmentMetrics,
         achievements: achievementSeed,
         completedMilestones: [],
+        practiceCheckoffs: [],
       };
       saveToStorage(initData);
       dispatch({ type: 'INITIALIZE', payload: initData });
@@ -118,16 +152,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (state.initialized) {
       saveToStorage({
-        version: 1,
+        version: 2,
         initialized: true,
         sessionLogs: state.sessionLogs,
         lessonPlans: state.lessonPlans,
         metrics: state.metrics,
         achievements: state.achievements,
         completedMilestones: state.completedMilestones,
+        practiceCheckoffs: state.practiceCheckoffs,
       });
     }
-  }, [state.sessionLogs, state.lessonPlans, state.metrics, state.achievements, state.completedMilestones, state.initialized]);
+  }, [state.sessionLogs, state.lessonPlans, state.metrics, state.achievements, state.completedMilestones, state.practiceCheckoffs, state.initialized]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
