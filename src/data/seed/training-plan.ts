@@ -1,0 +1,107 @@
+import { Phase, Week, ABCProgression } from '../../types';
+
+export const phases: Phase[] = [
+  {
+    id: 'phase-1',
+    number: 1,
+    name: 'Movement & Contact Quality',
+    startWeek: 1,
+    endWeek: 4,
+    dateRange: 'March 9 – April 5',
+    description: 'Build the physical and technical foundation. Footwork patterns become automatic, contact geometry is internalized, and serve rhythm is established. Every session reinforces split step timing, arm\'s distance contact, and the Two Laws of reliable ball-striking.',
+    tennisFocus: [
+      'Footwork foundation + forehand spacing',
+      'Backhand grip automation + rally building',
+      'Serve rhythm: same motion, place don\'t toss',
+      'Contact geometry: Arrow Alignment + Two Laws'
+    ],
+    abcFocus: [
+      'Ladder agility + single-leg balance',
+      'Cone reaction drills + hand-eye coordination',
+      'Speed starts + directional change',
+      'Balance challenges + lateral shuffle speed'
+    ],
+    milestones: [
+      'Split step without reminders',
+      'Backhand grip found < 2 sec',
+      '5 consecutive serves in box',
+      'Phase 1 numbers assessment completed'
+    ]
+  },
+  {
+    id: 'phase-2',
+    number: 2,
+    name: 'Weapons & Decision-Making',
+    startWeek: 5,
+    endWeek: 8,
+    dateRange: 'April 6 – May 3',
+    description: 'Transform reliable strokes into weapons. Forehand becomes a depth-and-pace tool, serve placement becomes intentional, net approach patterns are introduced, and pattern play teaches decision-making in live rallies.',
+    tennisFocus: [
+      'Forehand weapon: depth + overspin cover + pace with accuracy',
+      'Serve placement (Wide/Body/T) + Confidence Arithmetic',
+      'Net approach + volley contact + closing patterns',
+      'Pattern play: cross-court building to DTL attack + Mistakes Math'
+    ],
+    abcFocus: [
+      'Explosive first step + agility combos',
+      'Multi-directional speed + coordination',
+      'Quick feet + deceleration + balance',
+      'Acceleration/deceleration + agility'
+    ],
+    milestones: [
+      '8/10 FH past service line',
+      'Call placement before serve',
+      'Approach-volley pattern 5x',
+      'Phase 2 numbers assessment completed'
+    ]
+  },
+  {
+    id: 'phase-3',
+    number: 3,
+    name: 'Competition & Yellow Ball Prep',
+    startWeek: 9,
+    endWeek: 12,
+    dateRange: 'May 4 – May 31',
+    description: 'Everything comes together under competitive pressure. Match situations test decision-making, yellow ball transition begins, tournament preparation focuses on game plans, and the final assessment measures all progress.',
+    tennisFocus: [
+      'Match situations: pressure points + Play the Ten',
+      'Yellow ball adaptation + swing speed allocation',
+      'Tournament prep: game plans + 85% quality baseline',
+      'Full assessment + yellow ball readiness'
+    ],
+    abcFocus: [
+      'Match-specific movement + endurance',
+      'Power movements + coordination combos',
+      'Speed endurance + recovery movement',
+      'Full ABC battery test'
+    ],
+    milestones: [
+      'Track unforced errors in sets',
+      '15-ball yellow ball rally',
+      'Execute game plan in practice set',
+      'Final assessment day completed'
+    ]
+  }
+];
+
+export const weeks: Week[] = [
+  { weekNumber: 1, phaseNumber: 1, dateRange: 'Mar 9–15', startDate: '2026-03-09', endDate: '2026-03-15', tennisFocusTheme: 'Footwork foundation + forehand spacing (arm\'s distance)', abcFocusTheme: 'Ladder agility + single-leg balance', milestone: 'Split step without reminders' },
+  { weekNumber: 2, phaseNumber: 1, dateRange: 'Mar 16–22', startDate: '2026-03-16', endDate: '2026-03-22', tennisFocusTheme: 'Backhand grip automation + cross-court rally building', abcFocusTheme: 'Cone reaction drills + hand-eye coordination', milestone: 'Backhand grip found < 2 sec' },
+  { weekNumber: 3, phaseNumber: 1, dateRange: 'Mar 23–29', startDate: '2026-03-23', endDate: '2026-03-29', tennisFocusTheme: 'Serve rhythm: same motion, place don\'t toss, high-to-low', abcFocusTheme: 'Speed starts + directional change', milestone: '5 consecutive serves in box' },
+  { weekNumber: 4, phaseNumber: 1, dateRange: 'Mar 30–Apr 5', startDate: '2026-03-30', endDate: '2026-04-05', tennisFocusTheme: 'Contact geometry: Arrow Alignment + Two Laws in live ball', abcFocusTheme: 'Balance challenges + lateral shuffle speed', milestone: 'Phase 1 numbers assessment' },
+  { weekNumber: 5, phaseNumber: 2, dateRange: 'Apr 6–12', startDate: '2026-04-06', endDate: '2026-04-12', tennisFocusTheme: 'Forehand weapon: depth + overspin cover + pace with accuracy', abcFocusTheme: 'Explosive first step + agility combos', milestone: '8/10 FH past service line' },
+  { weekNumber: 6, phaseNumber: 2, dateRange: 'Apr 13–19', startDate: '2026-04-13', endDate: '2026-04-19', tennisFocusTheme: 'Serve placement (Wide/Body/T) + Confidence Arithmetic', abcFocusTheme: 'Multi-directional speed + coordination', milestone: 'Call placement before serve' },
+  { weekNumber: 7, phaseNumber: 2, dateRange: 'Apr 20–26', startDate: '2026-04-20', endDate: '2026-04-26', tennisFocusTheme: 'Net approach + volley contact + closing patterns', abcFocusTheme: 'Quick feet + deceleration + balance', milestone: 'Approach-volley pattern 5x' },
+  { weekNumber: 8, phaseNumber: 2, dateRange: 'Apr 27–May 3', startDate: '2026-04-27', endDate: '2026-05-03', tennisFocusTheme: 'Pattern play: cross-court building to DTL attack + Mistakes Math', abcFocusTheme: 'Acceleration/deceleration + agility', milestone: 'Phase 2 numbers assessment' },
+  { weekNumber: 9, phaseNumber: 3, dateRange: 'May 4–10', startDate: '2026-05-04', endDate: '2026-05-10', tennisFocusTheme: 'Match situations: pressure points + Play the Ten decision-making', abcFocusTheme: 'Match-specific movement + endurance', milestone: 'Track unforced errors in sets' },
+  { weekNumber: 10, phaseNumber: 3, dateRange: 'May 11–17', startDate: '2026-05-11', endDate: '2026-05-17', tennisFocusTheme: 'Yellow ball adaptation + swing speed allocation (spin vs. pace)', abcFocusTheme: 'Power movements + coordination combos', milestone: '15-ball yellow ball rally' },
+  { weekNumber: 11, phaseNumber: 3, dateRange: 'May 18–24', startDate: '2026-05-18', endDate: '2026-05-24', tennisFocusTheme: 'Tournament prep: game plans + 85% quality baseline', abcFocusTheme: 'Speed endurance + recovery movement', milestone: 'Execute game plan in practice set' },
+  { weekNumber: 12, phaseNumber: 3, dateRange: 'May 25–31', startDate: '2026-05-25', endDate: '2026-05-31', tennisFocusTheme: 'Full assessment + yellow ball readiness', abcFocusTheme: 'Full ABC battery test', milestone: 'Final assessment day' },
+];
+
+export const abcProgressions: ABCProgression[] = [
+  { component: 'Agility', phase1: 'Ladder basics, cone weaves, 4-corner shuffle, split step timing games', phase2: 'Reaction ladders, multi-directional combos, shadow tennis footwork patterns', phase3: 'Match-specific court coverage, rally-recovery patterns, full-court movement' },
+  { component: 'Balance', phase1: 'Single-leg stands, balance beam walks, ball toss on balance pad', phase2: 'Dynamic balance in movement, landing stability, deceleration control', phase3: 'Balance under fatigue, split-step landing quality, recovery balance' },
+  { component: 'Speed', phase1: 'Short sprint starts (5–10m), first-step quickness, lateral shuffle speed', phase2: 'Explosive first step, acceleration/deceleration, change-of-direction speed', phase3: 'Speed endurance, repeated sprint ability, match-length movement capacity' },
+  { component: 'Coordination', phase1: 'Hand-eye: juggling, ball toss patterns, skipping with racket, bounce-hit games', phase2: 'Complex combos: footwork + catch, agility + ball skills, three-in-view tracking', phase3: 'Sport-specific: movement + stroke timing, serve toss coordination, match rhythm' },
+];

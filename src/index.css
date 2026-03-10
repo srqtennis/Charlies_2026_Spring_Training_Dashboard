@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #002E5D;
+  --color-srq-red: #E4002B;
+  --color-light-gray: #F5F5F5;
+  --color-med-gray: #E0E0E0;
+  --color-dark-text: #333333;
+  --color-muted-text: #888888;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333333;
+  background-color: #F5F5F5;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
