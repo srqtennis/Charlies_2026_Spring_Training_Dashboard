@@ -71,17 +71,17 @@ export default function PlayerAchievementsPage() {
             {locked.map(badge => (
               <div
                 key={badge.id}
-                className="bg-gray-100 border-2 border-gray-200 rounded-2xl p-4 text-center opacity-70"
+                className="bg-gray-100 border-2 border-gray-200 rounded-2xl p-4 text-center"
               >
                 <div className="relative inline-block">
-                  <span className="text-5xl block mb-2 grayscale">{badge.icon}</span>
+                  <span className="text-5xl block mb-2 grayscale opacity-50">{badge.icon}</span>
                   <span className="absolute -top-1 -right-1 text-lg">🔒</span>
                 </div>
                 <h4 className="font-bold text-gray-500 text-sm">{badge.name}</h4>
                 <p className="text-[11px] text-gray-400 mt-1">{badge.description}</p>
-                <div className="bg-white rounded-lg px-2 py-1 mt-2">
-                  <p className="text-[10px] text-navy font-semibold">
-                    How to unlock: {badge.criteria}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg px-2 py-1.5 mt-2">
+                  <p className="text-[10px] text-amber-700">
+                    🎯 <span className="font-semibold">{badge.criteria}</span>
                   </p>
                 </div>
               </div>
