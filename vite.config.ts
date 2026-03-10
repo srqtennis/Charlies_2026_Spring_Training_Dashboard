@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/Charlies_2026_Spring_Training_Dashboard/',
+  base: '/',
   resolve: {
     alias: {
       '@': '/src',
