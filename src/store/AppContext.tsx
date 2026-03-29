@@ -133,16 +133,17 @@ export function AppProvider({ children }: { children: ReactNode }) {
     if (stored.initialized) {
       dispatch({ type: 'INITIALIZE', payload: stored });
     } else {
+      // Fresh init or v2→v3 migration (initialized set to false, but may have user data)
       const lessonPlans = generateAllLessonPlans();
       const initData: StorageData = {
-        version: 2,
+        version: 3,
         initialized: true,
-        sessionLogs: [],
+        sessionLogs: stored.sessionLogs || [],
         lessonPlans,
-        metrics: assessmentMetrics,
+        metrics: stored.metrics?.length ? stored.metrics : assessmentMetrics,
         achievements: achievementSeed,
-        completedMilestones: [],
-        practiceCheckoffs: [],
+        completedMilestones: stored.completedMilestones || [],
+        practiceCheckoffs: stored.practiceCheckoffs || [],
       };
       saveToStorage(initData);
       dispatch({ type: 'INITIALIZE', payload: initData });
@@ -152,7 +153,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (state.initialized) {
       saveToStorage({
-        version: 2,
+        version: 3,
         initialized: true,
         sessionLogs: state.sessionLogs,
         lessonPlans: state.lessonPlans,
